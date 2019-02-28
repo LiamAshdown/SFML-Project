@@ -23,6 +23,7 @@
 */
 #ifndef _Client_SpriteManager_h_
 #include "SharedDefines.h"
+#include "Animation.h"
 #define _Client_SpriteManager_h_
 #endif /* _Client_SpriteManager_h_ */
 
@@ -34,7 +35,8 @@
 class Menu;
 
 ///< TYPEDEF
-typedef std::map<const char*, sf::Sprite*> SpriteMap;
+typedef std::map<std::string, sf::Sprite*> SpriteMap;
+typedef std::map<std::string, Animation*> SpriteAnimationMap;
 
 class SpriteManager
 {
@@ -45,12 +47,17 @@ public:
     ~SpriteManager();
 
 public:
-    sf::Sprite* GetSprite(const char* name);
-    void RemoveSprite(const char* name);
-    void AddSprite(const char* fileName);
+    sf::Sprite* GetSprite(std::string name);
+    void RemoveSprite(std::string name);
+
+    Animation* GetSpriteAnimation(std::string name);
+
+    void AddSprite(std::string fileName);
+    void AddSpriteAnimation(std::string fileName);
 
 private:
     SpriteMap mSprites;
+    SpriteAnimationMap mAnimationSprites;
 };
 #define sSpriteManager SpriteManager::instance()
 

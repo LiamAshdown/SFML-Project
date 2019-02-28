@@ -14,34 +14,33 @@
 *
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+************************************************************************
+*                           PURPOSE
+* GameManager is responsible for loading all data about the game.
 */
-#ifndef _Client_Player_h_
+#ifndef _Client_AnimationManager_h_
 #include "SharedDefines.h"
-#define _Client_Player_h_
-#endif /* _Client_Player_h_ */
+#define _Client_AnimationManager_h_
+#endif /* _Client_AnimationManager_h_ */
 
 ///< ENUMS
 
 ///< STRUCT
 
 ///< CLASS
-class Menu;
 
 ///< TYPEDEF
 
-class Player
+class AnimationManager
 {
 public:
-    friend class Menu;
-public:
-    Player();
-    ~Player();
+    static AnimationManager* instance();
 
 public:
-    sf::Sprite GetSprite();
-    void PlayerMovement(sf::RenderWindow* window, uint8 triggerID);
+    AnimationManager();
+    ~AnimationManager();
 
-private:
-    sf::Sprite mSprite;
+public:
+    void AddAnimation();
 };
-
+#define sGameManager AnimationManager::instance()

@@ -19,7 +19,7 @@
 #include "GameUI.h"
 #include "TriggerEvents.h"
 //-----------------------------------------------//
-GameUI::GameUI(const char* windowTitle) : mWidth(1200), mHeight(800)
+GameUI::GameUI(const char* windowTitle) : mWidth(WIDTH), mHeight(HEIGHT)
 {
     mWindow = new sf::RenderWindow(sf::VideoMode(mWidth, mHeight), windowTitle);
 }
@@ -48,20 +48,26 @@ void GameUI::UILoop()
             }
             break;
 
-            case sf::Event::MouseButtonPressed:
-            {
-                sMenuManager->GetCurrentMenu()->TriggerEvent(mWindow);
-            }
-            break;
-
             default:
                 break;
             }
         }
 
         mWindow->clear();
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            sMenuManager->GetCurrentMenu()->TriggerEvent(mWindow, TRIGGER_KEYBOARD_D);
+        }
+
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            sMenuManager->GetCurrentMenu()->TriggerEvent(mWindow, TRIGGER_MOUSE_LEFT);
+        }
+
         // Draw our current menu
         sMenuManager->GetCurrentMenu()->DrawMenu(mWindow);
+
         mWindow->display();
     }
 }

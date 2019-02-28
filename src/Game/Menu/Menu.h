@@ -21,6 +21,7 @@
 */
 #ifndef _Client_Menu_h_
 #include "SharedDefines.h"
+#include "Player.h"
 #define _Client_Menu_h_
 #endif /* _Client_Menu_h_ */
 
@@ -58,7 +59,7 @@ public:
     friend class GameUI;
 
 public:
-    Menu(const uint32 width, const uint32 height);
+    Menu(const uint32 width, const uint32 height, std::string name);
     ~Menu();
     void DrawMenu(sf::RenderWindow* window);
     bool CheckIntersect(sf::RenderWindow* window, MenuData* menu);
@@ -72,20 +73,31 @@ public:
     ////////////////////////////////////
     //         TRIGGER EVENTS         //
     ////////////////////////////////////
-    void TriggerEvent(sf::RenderWindow* window);
-    void ExecuteTrigger(const TriggerStruct& triggerHandle, MenuData* menu);
-    void TriggerPlayMouseLeft(MenuData* menu);
-    void HandleNULL(MenuData* menu) {}
+    void TriggerEvent(sf::RenderWindow* window, uint8 triggerID);
+    void ExecuteTrigger(const TriggerStruct& triggerHandle, sf::RenderWindow* window);
+    void TriggerPlayMenu(sf::RenderWindow* window);
+    void TriggerPlayerMoveDown(sf::RenderWindow* window);
+    void HandleNULL(sf::RenderWindow* window) {}
     ////////////////////////////////////
     //      END OF TRIGGER EVENTS    //
     ////////////////////////////////////
 
 private:
+    ////////////////////////////////////
+    //         MENUS                 //
+    ////////////////////////////////////
+    void PlayMenu(sf::RenderWindow& window);
+
+private:
     uint32 mHeight;
     uint32 mWidth;
 
-private:
-    // Text
     SlotMap mSlot;
     sf::Font* mFont;
+
+    std::string mMenuName;
+
+    uint8 mLastTriggerId;
+
+    Player* mPlayer;
 };

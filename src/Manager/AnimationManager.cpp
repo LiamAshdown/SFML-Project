@@ -15,33 +15,26 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef _Client_Player_h_
-#include "SharedDefines.h"
-#define _Client_Player_h_
-#endif /* _Client_Player_h_ */
-
-///< ENUMS
-
-///< STRUCT
-
-///< CLASS
-class Menu;
-
-///< TYPEDEF
-
-class Player
+//-----------------------------------------------//
+#include "AnimationManager.h"
+//-----------------------------------------------//
+AnimationManager* AnimationManager::instance()
 {
-public:
-    friend class Menu;
-public:
-    Player();
-    ~Player();
+    static AnimationManager instance;
+    return &instance;
+}
+//-----------------------------------------------//
+AnimationManager::AnimationManager()
+{
+   
+}
+//-----------------------------------------------//
+AnimationManager::~AnimationManager()
+{
+}
+//-----------------------------------------------//
+void AnimationManager::AddAnimation()
+{
 
-public:
-    sf::Sprite GetSprite();
-    void PlayerMovement(sf::RenderWindow* window, uint8 triggerID);
-
-private:
-    sf::Sprite mSprite;
-};
-
+}
+//-----------------------------------------------//

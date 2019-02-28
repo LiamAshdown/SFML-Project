@@ -34,8 +34,10 @@ TriggerEvents::~TriggerEvents()
 //-----------------------------------------------//
 void TriggerEvents::InitializeTriggerEvents()
 {
-    StoreTriggerEvent(Triggers::TRIGGER_PLAY_MOUSE_LEFT, "MOUSE_LEFT", &Menu::TriggerPlayMouseLeft);
+    StoreTriggerEvent(Triggers::TRIGGER_MOUSE_LEFT,      "MOUSE_LEFT",     &Menu::TriggerPlayMenu           );
+    StoreTriggerEvent(Triggers::TRIGGER_KEYBOARD_D,      "KEYBOARD_W",     &Menu::TriggerPlayerMoveDown     );
 }
+//-----------------------------------------------//
 TriggerStruct TriggerEvents::GetTrigger(uint16 id)
 {
     TriggerMap::iterator itr = mTrigger.find(id);
@@ -46,7 +48,7 @@ TriggerStruct TriggerEvents::GetTrigger(uint16 id)
     return EmptyHandler;
 }
 //-----------------------------------------------//
-void TriggerEvents::StoreTriggerEvent(uint16 id, const char* name, void(Menu::* handler)(MenuData* menu))
+void TriggerEvents::StoreTriggerEvent(uint16 id, const char* name, void(Menu::* handler)(sf::RenderWindow* window))
 {
     TriggerStruct& trigger = mTrigger[id];
     trigger.name = name;

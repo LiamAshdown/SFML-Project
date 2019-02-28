@@ -29,8 +29,8 @@
 enum Triggers : uint16
 {
     TRIGGER_NONE                        = 0x00,
-    TRIGGER_PLAY_MOUSE_LEFT             = 0x01,
-    TRIGGER_HELP_MOUSE_LEFT             = 0x02,
+    TRIGGER_MOUSE_LEFT                  = 0x01,
+    TRIGGER_KEYBOARD_D                  = 0x02,
 };
 
 ///< STRUCT
@@ -41,7 +41,7 @@ enum Triggers : uint16
 struct TriggerStruct
 {
     char const* name;
-    void (Menu::*handler)(MenuData* menu);
+    void (Menu::*handler)(sf::RenderWindow* window);
 };
 
 typedef std::map<uint16, TriggerStruct> TriggerMap;
@@ -60,7 +60,7 @@ public:
     static TriggerStruct const EmptyHandler;
 
 private:
-    void StoreTriggerEvent(uint16 id, const char* name, void(Menu::* handler)(MenuData* menu));
+    void StoreTriggerEvent(uint16 id, const char* name, void(Menu::* handler)(sf::RenderWindow* window));
 
 private:
     TriggerMap mTrigger;

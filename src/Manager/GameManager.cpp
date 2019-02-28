@@ -18,6 +18,7 @@
 //-----------------------------------------------//
 #include "GameManager.h"
 #include "TriggerEvents.h"
+#include <Windows.h>
 //-----------------------------------------------//
 GameManager* GameManager::instance()
 {
@@ -38,16 +39,17 @@ void GameManager::LoadEngineData()
 {
     ///< This is where you load your sprite(s)
     sSpriteManager->AddSprite("ship.png");
+    sSpriteManager->AddSpriteAnimation("test.png");
 
     ///< This is where you load your menu(s)
-    Menu* mainMenu = new Menu(WIDTH, HEIGHT);
-    mainMenu->CreateButton("Play", sf::Color::White, 24, sf::Vector2f(WIDTH / 2, 300), TRIGGER_PLAY_MOUSE_LEFT, true);
-    mainMenu->CreateButton("Help", sf::Color::White, 24, sf::Vector2f(WIDTH / 2, HEIGHT / 2), TRIGGER_HELP_MOUSE_LEFT, true);
+    Menu* mainMenu = new Menu(WIDTH, HEIGHT, "MAIN");
+    mainMenu->CreateButton("Play", sf::Color::White, 24, sf::Vector2f(WIDTH / 2, 300), TRIGGER_MOUSE_LEFT, true);
+    //mainMenu->CreateButton("Help", sf::Color::White, 24, sf::Vector2f(WIDTH / 2, HEIGHT / 2), TRIGGER_MOUSE_LEFT, true);
 
     sMenuManager->AddMenu("Menu", mainMenu);
     sMenuManager->SetCurrentMenu(sMenuManager->GetMenuByName("Menu"));
 
-    Menu* playMenu = new Menu(WIDTH, HEIGHT);
+    Menu* playMenu = new Menu(WIDTH, HEIGHT, "PLAY");
     sMenuManager->AddMenu("Play", playMenu);
 
     ///< Loading trigger events

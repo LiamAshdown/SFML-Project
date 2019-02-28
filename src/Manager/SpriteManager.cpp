@@ -33,17 +33,23 @@ SpriteManager::~SpriteManager()
     for (auto itr : mSprites)
         delete itr.second;
 
+    for (auto itr : mAnimationSprites)
+        delete itr.second;
+
     mSprites.clear();
+    mAnimationSprites.clear();
 }
 //-----------------------------------------------//
-sf::Sprite* SpriteManager::GetSprite(const char * name)
+sf::Sprite* SpriteManager::GetSprite(std::string name)
 {
     SpriteMap::iterator itr = mSprites.find(name);
     if (itr != mSprites.end())
         return itr->second;
+
+    return nullptr;
 }
 //-----------------------------------------------//
-void SpriteManager::RemoveSprite(const char * name)
+void SpriteManager::RemoveSprite(std::string name)
 {
     SpriteMap::iterator itr = mSprites.find(name);
     if (itr != mSprites.end())
@@ -53,7 +59,16 @@ void SpriteManager::RemoveSprite(const char * name)
     }
 }
 //-----------------------------------------------//
-void SpriteManager::AddSprite(const char * fileName)
+Animation * SpriteManager::GetSpriteAnimation(std::string name)
+{
+    SpriteAnimationMap::iterator itr = mAnimationSprites.find(name);
+    if (itr != mAnimationSprites.end())
+        return itr->second;
+  
+    return nullptr;
+}
+//-----------------------------------------------//
+void SpriteManager::AddSprite(std::string fileName)
 {
     sf::Texture texture;
 
@@ -64,7 +79,25 @@ void SpriteManager::AddSprite(const char * fileName)
 
         mSprites[fileName] = sprite;
     }
-    else
-        ;//LOG(INFO, "CANNOT LOAD IMAGE");
+}
+//-----------------------------------------------//
+void SpriteManager::AddSpriteAnimation(std::string fileName)
+{
+    sf::Texture* texture = new sf::Texture;
+    if (texture->loadFromFile(fileName))
+    {
+        sf::Sprite* sprite = new sf::Sprite;
+        sprite->setTexture(*texture);
+
+        Animation* animation = new Animation(sprite, texture);
+
+        animation->AddFrame(sf::IntRect(32, 0, 32, 32), MOVEMENT_WALKING_DOWN);
+        animation->AddFrame(sf::IntRect(32, 96, 32, 32), MOVEMENT_WALKING_DOWN);
+
+        mAnimationSprites[fileName] = animation;
+
+        // We also add it into our sprite container aswell
+        AddSprite(fileName);
+    }
 }
 //-----------------------------------------------//

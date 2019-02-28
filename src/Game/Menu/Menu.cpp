@@ -18,18 +18,22 @@
 //-----------------------------------------------//
 #include "TriggerEvents.h"
 #include "MenuManager.h"
+#include "SpriteManager.h"
 //-----------------------------------------------//
-Menu::Menu(const uint32 width, const uint32 height)
+Menu::Menu(const uint32 width, const uint32 height, std::string menu)
 {
     mWidth = width;
     mHeight = height;
     mFont = new sf::Font;
-
+    mMenuName = menu;
+    mLastTriggerId = 0;
     InitializeFont();
 }
 //-----------------------------------------------//
 Menu::~Menu()
 {
+    delete mPlayer;
+
     for (auto itr : mSlot)
         delete itr.second;
 
@@ -52,7 +56,7 @@ void Menu::DrawMenu(sf::RenderWindow* window)
             window->draw(menu->sText);
             window->draw(menu->sButton);
         }
-       
+
         window->draw(menu->sText);
     }
 }
@@ -116,36 +120,54 @@ void Menu::CreateButton(std::string name, sf::Color colour, uint32 size, sf::Vec
     mSlot[triggerID] = menu;
 }
 //-----------------------------------------------//
-void Menu::ExecuteTrigger(const TriggerStruct& triggerHandle, MenuData * menu)
+void Menu::ExecuteTrigger(const TriggerStruct& triggerHandle, sf::RenderWindow* window)
 {
-    (this->*triggerHandle.handler)(menu);
+    (this->*triggerHandle.handler)(window);
 }
 //-----------------------------------------------//
-void Menu::TriggerEvent(sf::RenderWindow* window)
+void Menu::TriggerEvent(sf::RenderWindow* window, uint8 triggerID)
+{
+    mLastTriggerId = triggerID;
+
+    const TriggerStruct& triggerHandle = sTriggerEvent->GetTrigger(triggerID);
+    ExecuteTrigger(triggerHandle, window);
+}
+//-----------------------------------------------//
+void Menu::TriggerPlayMenu(sf::RenderWindow* window)
 {
     SlotMap::iterator itr;
     for (itr = mSlot.begin(); itr != mSlot.end(); itr++)
     {
         MenuData* menu = itr->second;
 
+        if (menu->sTriggerID != mLastTriggerId)
+            continue;
+
         if (menu->sIsButton)
         {
             if (CheckIntersect(window, menu))
             {
-                const TriggerStruct& triggerHandle = sTriggerEvent->GetTrigger(menu->sTriggerID);
-                ExecuteTrigger(triggerHandle, menu);
+                // Change to our play menu
+                sMenuManager->SetCurrentMenu(sMenuManager->GetMenuByName("Play"));
                 break;
             }
         }
-
     }
+
+    // Initialize Player
+    mPlayer = new Player;
+
+    mPlayer->mSprite = *sSpriteManager->GetSprite("test.png");
+
 }
 //-----------------------------------------------//
-void Menu::TriggerPlayMouseLeft(MenuData* menu)
+void Menu::TriggerPlayerMoveDown(sf::RenderWindow* window)
 {
-    // Change to our play menu
-    sMenuManager->SetCurrentMenu(sMenuManager->GetMenuByName("Play"));
-
-    // Initialize Player data and create ship
+    mPlayer->PlayerMovement(window, TRIGGER_KEYBOARD_D);
+}
+//-----------------------------------------------//
+void Menu::PlayMenu(sf::RenderWindow& window)
+{
+    ;
 }
 //-----------------------------------------------//
