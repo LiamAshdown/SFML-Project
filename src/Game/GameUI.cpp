@@ -84,7 +84,6 @@ void GameUI::InitializeMenu()
 
     ///< PLAY MENU
     Menu* playMenu = new Menu(mWidth, mHeight);
-    playMenu->CreateText("Working!", sf::Color::White, 24, sf::Vector2f(mWidth / 2, mHeight / 2));
     sMenuManager->AddMenu("Play", playMenu);
 }
 //-----------------------------------------------//

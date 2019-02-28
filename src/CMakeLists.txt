@@ -23,6 +23,9 @@ project (UknownProject)
 
 cmake_minimum_required(VERSION 3.2)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Entity)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Entity/Ships)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Entity/Player)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Game)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Game/Menu)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Game/Menu/Trigger)

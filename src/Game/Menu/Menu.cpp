@@ -121,11 +121,6 @@ void Menu::ExecuteTrigger(const TriggerStruct& triggerHandle, MenuData * menu)
     (this->*triggerHandle.handler)(menu);
 }
 //-----------------------------------------------//
-void Menu::TriggerPlayMouseLeft(MenuData* menu)
-{
-    sMenuManager->SetCurrentMenu(sMenuManager->GetMenuByName("Play"));
-}
-//-----------------------------------------------//
 void Menu::TriggerEvent(sf::RenderWindow* window)
 {
     SlotMap::iterator itr;
@@ -144,5 +139,13 @@ void Menu::TriggerEvent(sf::RenderWindow* window)
         }
 
     }
+}
+//-----------------------------------------------//
+void Menu::TriggerPlayMouseLeft(MenuData* menu)
+{
+    // Change to our play menu
+    sMenuManager->SetCurrentMenu(sMenuManager->GetMenuByName("Play"));
+
+    // Initialize Player data and create ship
 }
 //-----------------------------------------------//
