@@ -1,4 +1,4 @@
-=/*
+/*
 * Liam Ashdown
 * Copyright (C) 2018
 *
@@ -16,13 +16,13 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 //-----------------------------------------------//
-#include "Ship.h"
+#include "GameManager.h"
 //-----------------------------------------------//
-Ship::Ship()
+GameManager::GameManager()
 {
 }
 //-----------------------------------------------//
-Ship::~Ship()
+GameManager::~GameManager()
 {
 }
 //-----------------------------------------------//

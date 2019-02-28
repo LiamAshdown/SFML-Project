@@ -14,16 +14,27 @@
 *
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+************************************************************************
+*                           PURPOSE
+* GameManager is responsible for loading all data about the game.
 */
-#ifndef _Client_Ship_h_
+#ifndef _Client_GameManager_h_
 #include "SharedDefines.h"
-#define _Client_Ship_h_
-#endif /* _Client_Menu_h_ */
+#define _Client_GameManager_h_
+#endif /* _Client_GameManager_h_ */
 
-class Ship
+///< ENUMS
+
+///< STRUCT
+
+///< CLASS
+
+///< TYPEDEF
+
+class GameManager
 {
 public:
-    Ship();
-    ~Ship();
+    GameManager();
+    ~GameManager();
 };
 

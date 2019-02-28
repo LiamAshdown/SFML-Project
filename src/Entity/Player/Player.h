@@ -17,18 +17,21 @@
 */
 #ifndef _Client_Player_h_
 #include "SharedDefines.h"
-#include "Ship.h"
 #define _Client_Player_h_
-#endif /* _Client_Menu_h_ */
+#endif /* _Client_Player_h_ */
+
+///< ENUMS
+
+///< STRUCT
+
+///< CLASS
+
+///< TYPEDEF
 
 class Player
 {
 public:
     Player();
     ~Player();
-    
-
-private:
-    Ship* mShip;
 };
 

@@ -15,40 +15,40 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ************************************************************************
-*                           PURPOSE
-* This is the main file which draws onto the screen.
-* This is also where you create your menu(s) in InitializeMenu();
+*                           PURPOSE 
+* This file is responsible for creating sf::Sprite from loading images,
+* from a directory which the user supplies.
+* The sprites are loading into a map container using the key as the sprites name.
+* The user can get sprites from the container or remove existing sprites from the container.
 */
-#ifndef _Client_GameUI_h_
+#ifndef _Client_SpriteManager_h_
 #include "SharedDefines.h"
-#include "MenuManager.h"
-#define _Client_GameUI_h_
-#endif /* _Client_GameUI_h_ */
+#define _Client_SpriteManager_h_
+#endif /* _Client_SpriteManager_h_ */
 
 ///< ENUMS
 
 ///< STRUCT
 
 ///< CLASS
+class Menu;
 
 ///< TYPEDEF
+typedef std::map<const char*, sf::Sprite*> SpriteMap;
 
-class GameUI
+class SpriteManager
 {
 public:
-    GameUI(const char* windowTitle);
-    ~GameUI();
+    SpriteManager();
+    ~SpriteManager();
 
 public:
-    void CreateUI();
+    void LoadSprites();
+    sf::Sprite* GetSprite(const char* name);
+    void RemoveSprite(const char* name);
+    void AddSprite(const char* fileName);
 
 private:
-    void UILoop();
-    void InitializeMenu();
-
-private:
-    sf::RenderWindow* mWindow;
-    const uint32 mWidth;
-    const uint32 mHeight;
+    SpriteMap mSprites;
 };
 

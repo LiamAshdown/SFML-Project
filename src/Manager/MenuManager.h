@@ -14,12 +14,24 @@
 *
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+************************************************************************
+*                           PURPOSE
+* The MenuManager stores the users menu into a container, which the user can
+* easily switch menu during run time. 
+* A variable called 'mCurrentMenu' holds the current menu which is currently
+* being drawn on the screen.
 */
+
 #ifndef _Client_MenuManager_h_
 #include "SharedDefines.h"
 #define _Client_MenuManager_h_
 #endif /* _Client_MenuManager_h_ */
 
+///< ENUMS
+
+///< STRUCT
+
+///< CLASS
 class Menu;
 
 ///< TYPEDEF

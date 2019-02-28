@@ -14,20 +14,28 @@
 *
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+************************************************************************
+*                           PURPOSE
+* This file is responsible for triggering events. Triggers are linked with an event(Sprite, Text)
+* If the sprite has a trigger 'Click' if the click is made, the event will fire the trigger.
 */
-
 #ifndef _Client_TriggerEvents_h_
 #define _Client_TriggerEvents_h_
 #include "SharedDefines.h"
 #include "Menu.h"
 #endif /* _Client_TriggerEvents_h_ */
 
+///< ENUMS
 enum Triggers : uint16
 {
-    TRIGGER_NONE            = 0x00,
-    TRIGGER_PLAY_MOUSE_LEFT = 0x01,
-    TRIGGER_HELP_MOUSE_LEFT = 0x02,
+    TRIGGER_NONE                        = 0x00,
+    TRIGGER_PLAY_MOUSE_LEFT             = 0x01,
+    TRIGGER_HELP_MOUSE_LEFT             = 0x02,
 };
+
+///< STRUCT
+
+///< CLASS
 
 ///< TYPEDEF
 struct TriggerStruct

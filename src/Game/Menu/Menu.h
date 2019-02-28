@@ -14,15 +14,22 @@
 *
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+************************************************************************
+*                           PURPOSE
+* Menu is created in GameUI and stored in MenuManager. The user can construct its
+* own text and buttons (also automatically creates a trigger; hover, leave, click)
 */
 #ifndef _Client_Menu_h_
 #include "SharedDefines.h"
 #define _Client_Menu_h_
 #endif /* _Client_Menu_h_ */
 
-#define CENTRE_BUTTON 5
+///< ENUMS
 
+///< STRUCT
 struct TriggerStruct;
+
+///< CLASS
 
 ///< TYPEDEF
 typedef struct MenuStruct
@@ -37,8 +44,10 @@ typedef struct MenuStruct
     sf::Color sOriginial;
     sf::Color sHover;
 
+    ///< Data
     bool sIsButton = false;
     uint16 sTriggerID;
+
 } MenuData;
 
 typedef std::map<uint32, MenuData*> SlotMap;
@@ -59,13 +68,17 @@ public:
     void CreateText(std::string name, sf::Color colour, uint32 size, sf::Vector2f windowSize);
     void CreateButton(std::string name, sf::Color colour, uint32 size, sf::Vector2f windowSize, uint32 triggerID, bool transparent = false, sf::Color hoverColour = sf::Color::Red);
 
+public:
     ////////////////////////////////////
-    // TRIGGER EVENTS                 //
+    //         TRIGGER EVENTS         //
     ////////////////////////////////////
     void TriggerEvent(sf::RenderWindow* window);
     void ExecuteTrigger(const TriggerStruct& triggerHandle, MenuData* menu);
     void TriggerPlayMouseLeft(MenuData* menu);
     void HandleNULL(MenuData* menu) {}
+    ////////////////////////////////////
+    //      END OF TRIGGER EVENTS    //
+    ////////////////////////////////////
 
 private:
     uint32 mHeight;
