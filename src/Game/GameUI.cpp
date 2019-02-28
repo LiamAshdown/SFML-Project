@@ -22,9 +22,6 @@
 GameUI::GameUI(const char* windowTitle) : mWidth(1200), mHeight(800)
 {
     mWindow = new sf::RenderWindow(sf::VideoMode(mWidth, mHeight), windowTitle);
-
-    // Initialize Trigger Events
-    sTriggerEvent->InitializeTriggerEvents();
 }
 //-----------------------------------------------//
 GameUI::~GameUI()
@@ -32,9 +29,6 @@ GameUI::~GameUI()
 }
 void GameUI::CreateUI()
 {
-    // Initialize our menu states
-    InitializeMenu();
-
     // Create our main loop
     UILoop();
 }
@@ -70,20 +64,5 @@ void GameUI::UILoop()
         sMenuManager->GetCurrentMenu()->DrawMenu(mWindow);
         mWindow->display();
     }
-}
-//-----------------------------------------------//
-void GameUI::InitializeMenu()
-{
-    ///< MAIN MENU
-    Menu* mainMenu = new Menu(mWidth, mHeight);
-    mainMenu->CreateButton("Play", sf::Color::White, 24, sf::Vector2f(mWidth / 2, 300), TRIGGER_PLAY_MOUSE_LEFT, true);
-    mainMenu->CreateButton("Help", sf::Color::White, 24, sf::Vector2f(mWidth / 2, mHeight / 2), TRIGGER_HELP_MOUSE_LEFT, true);
-
-    sMenuManager->AddMenu("Menu", mainMenu);
-    sMenuManager->SetCurrentMenu(sMenuManager->GetMenuByName("Menu"));
-
-    ///< PLAY MENU
-    Menu* playMenu = new Menu(mWidth, mHeight);
-    sMenuManager->AddMenu("Play", playMenu);
 }
 //-----------------------------------------------//

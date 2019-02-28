@@ -39,11 +39,12 @@ typedef std::map<const char*, sf::Sprite*> SpriteMap;
 class SpriteManager
 {
 public:
+    static SpriteManager* instance();
+public:
     SpriteManager();
     ~SpriteManager();
 
 public:
-    void LoadSprites();
     sf::Sprite* GetSprite(const char* name);
     void RemoveSprite(const char* name);
     void AddSprite(const char* fileName);
@@ -51,4 +52,5 @@ public:
 private:
     SpriteMap mSprites;
 };
+#define sSpriteManager SpriteManager::instance()
 

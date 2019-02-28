@@ -18,6 +18,12 @@
 //-----------------------------------------------//
 #include "SpriteManager.h"
 //-----------------------------------------------//
+SpriteManager* SpriteManager::instance()
+{
+    static SpriteManager instance;
+    return &instance;
+}
+//-----------------------------------------------//
 SpriteManager::SpriteManager()
 {
 }
@@ -28,12 +34,6 @@ SpriteManager::~SpriteManager()
         delete itr.second;
 
     mSprites.clear();
-}
-//-----------------------------------------------//
-void SpriteManager::LoadSprites()
-{
-    ///< Loading an image
-    AddSprite("test.png");
 }
 //-----------------------------------------------//
 sf::Sprite* SpriteManager::GetSprite(const char * name)

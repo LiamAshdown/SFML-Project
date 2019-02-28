@@ -17,7 +17,6 @@
 ************************************************************************
 *                           PURPOSE
 * This is the main file which draws onto the screen.
-* This is also where you create your menu(s) in InitializeMenu();
 */
 #ifndef _Client_GameUI_h_
 #include "SharedDefines.h"
@@ -44,7 +43,6 @@ public:
 
 private:
     void UILoop();
-    void InitializeMenu();
 
 private:
     sf::RenderWindow* mWindow;

@@ -41,3 +41,5 @@ typedef std::uint8_t uint8;
 
 ///< MACRO
 #define CENTRE_BUTTON 5
+#define WIDTH 1200
+#define HEIGHT 800

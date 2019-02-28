@@ -20,6 +20,8 @@
 */
 #ifndef _Client_GameManager_h_
 #include "SharedDefines.h"
+#include "SpriteManager.h"
+#include "GameUI.h"
 #define _Client_GameManager_h_
 #endif /* _Client_GameManager_h_ */
 
@@ -34,7 +36,16 @@
 class GameManager
 {
 public:
+    static GameManager* instance();
+
+public:
     GameManager();
     ~GameManager();
-};
 
+public:
+    void LoadEngineData();
+
+private:
+    GameUI* game;
+};
+#define sGameManager GameManager::instance()

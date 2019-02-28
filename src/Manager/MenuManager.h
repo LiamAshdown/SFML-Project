@@ -21,7 +21,6 @@
 * A variable called 'mCurrentMenu' holds the current menu which is currently
 * being drawn on the screen.
 */
-
 #ifndef _Client_MenuManager_h_
 #include "SharedDefines.h"
 #define _Client_MenuManager_h_
