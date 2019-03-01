@@ -73,9 +73,9 @@ public:
     ////////////////////////////////////
     //         TRIGGER EVENTS         //
     ////////////////////////////////////
-    void TriggerEvent(sf::RenderWindow* window, uint8 triggerID);
+    void TriggerEvent(sf::RenderWindow* window, uint8 triggerID, std::string menuName);
     void ExecuteTrigger(const TriggerStruct& triggerHandle, sf::RenderWindow* window);
-    void TriggerPlayMenu(sf::RenderWindow* window);
+    void TriggerMainMenu(sf::RenderWindow* window);
     void TriggerPlayerMoveDown(sf::RenderWindow* window);
     void HandleNULL(sf::RenderWindow* window) {}
     ////////////////////////////////////

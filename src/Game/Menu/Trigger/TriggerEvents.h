@@ -28,9 +28,9 @@
 ///< ENUMS
 enum Triggers : uint16
 {
-    TRIGGER_NONE                        = 0x00,
-    TRIGGER_MOUSE_LEFT                  = 0x01,
-    TRIGGER_KEYBOARD_D                  = 0x02,
+    TRIGGER_NONE                             = 0x00,
+    TRIGGER_MAIN_MENU_PLAY                   = 0x01,
+    TRIGGER_PLAY_KEYBOARD_D                  = 0x02,
 };
 
 ///< STRUCT

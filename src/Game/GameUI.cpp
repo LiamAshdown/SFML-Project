@@ -57,12 +57,12 @@ void GameUI::UILoop()
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
-            sMenuManager->GetCurrentMenu()->TriggerEvent(mWindow, TRIGGER_KEYBOARD_D);
+            sMenuManager->GetCurrentMenu()->TriggerEvent(mWindow, TRIGGER_PLAY_KEYBOARD_D, "PLAY");
         }
 
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
-            sMenuManager->GetCurrentMenu()->TriggerEvent(mWindow, TRIGGER_MOUSE_LEFT);
+            sMenuManager->GetCurrentMenu()->TriggerEvent(mWindow, TRIGGER_MAIN_MENU_PLAY, "MAIN");
         }
 
         // Draw our current menu

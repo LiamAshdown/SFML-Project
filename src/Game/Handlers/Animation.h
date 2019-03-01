@@ -58,7 +58,7 @@ public:
 
 public:
     void AddFrame(const sf::IntRect rect, const uint8 Id);
-    void ExecuteAnimation(const uint8 Id, sf::RenderWindow* window, sf::Sprite& sprite, bool useSprite);
+    void ExecuteAnimation(const uint8 Id, sf::RenderWindow* window, sf::Sprite* sprite = nullptr, bool useSprite = false);
 
 private:
     void PlayAnimation(const uint8 Id, sf::RenderWindow& window);

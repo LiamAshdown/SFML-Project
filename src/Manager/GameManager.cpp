@@ -38,19 +38,18 @@ GameManager::~GameManager()
 void GameManager::LoadEngineData()
 {
     ///< This is where you load your sprite(s)
-    sSpriteManager->AddSprite("ship.png");
     sSpriteManager->AddSpriteAnimation("test.png");
 
     ///< This is where you load your menu(s)
     Menu* mainMenu = new Menu(WIDTH, HEIGHT, "MAIN");
-    mainMenu->CreateButton("Play", sf::Color::White, 24, sf::Vector2f(WIDTH / 2, 300), TRIGGER_MOUSE_LEFT, true);
-    //mainMenu->CreateButton("Help", sf::Color::White, 24, sf::Vector2f(WIDTH / 2, HEIGHT / 2), TRIGGER_MOUSE_LEFT, true);
+    mainMenu->CreateButton("Play", sf::Color::White, 24, sf::Vector2f(WIDTH / 2, 300), TRIGGER_MAIN_MENU_PLAY, true);
+    //mainMenu->CreateButton("Help", sf::Color::White, 24, sf::Vector2f(WIDTH / 2, HEIGHT / 2), TRIGGER_MAIN_MENU_PLAY, true);
 
-    sMenuManager->AddMenu("Menu", mainMenu);
-    sMenuManager->SetCurrentMenu(sMenuManager->GetMenuByName("Menu"));
+    sMenuManager->AddMenu("MAIN", mainMenu);
+    sMenuManager->SetCurrentMenu(sMenuManager->GetMenuByName("MAIN"));
 
     Menu* playMenu = new Menu(WIDTH, HEIGHT, "PLAY");
-    sMenuManager->AddMenu("Play", playMenu);
+    sMenuManager->AddMenu("PLAY", playMenu);
 
     ///< Loading trigger events
     sTriggerEvent->InitializeTriggerEvents();

@@ -125,15 +125,18 @@ void Menu::ExecuteTrigger(const TriggerStruct& triggerHandle, sf::RenderWindow* 
     (this->*triggerHandle.handler)(window);
 }
 //-----------------------------------------------//
-void Menu::TriggerEvent(sf::RenderWindow* window, uint8 triggerID)
+void Menu::TriggerEvent(sf::RenderWindow* window, uint8 triggerID, std::string menuName)
 {
-    mLastTriggerId = triggerID;
+    if (mMenuName == menuName)
+    {
+        mLastTriggerId = triggerID;
 
-    const TriggerStruct& triggerHandle = sTriggerEvent->GetTrigger(triggerID);
-    ExecuteTrigger(triggerHandle, window);
+        const TriggerStruct& triggerHandle = sTriggerEvent->GetTrigger(triggerID);
+        ExecuteTrigger(triggerHandle, window);
+    }
 }
 //-----------------------------------------------//
-void Menu::TriggerPlayMenu(sf::RenderWindow* window)
+void Menu::TriggerMainMenu(sf::RenderWindow* window)
 {
     SlotMap::iterator itr;
     for (itr = mSlot.begin(); itr != mSlot.end(); itr++)
@@ -148,7 +151,7 @@ void Menu::TriggerPlayMenu(sf::RenderWindow* window)
             if (CheckIntersect(window, menu))
             {
                 // Change to our play menu
-                sMenuManager->SetCurrentMenu(sMenuManager->GetMenuByName("Play"));
+                sMenuManager->SetCurrentMenu(sMenuManager->GetMenuByName("PLAY"));
                 break;
             }
         }
@@ -157,13 +160,13 @@ void Menu::TriggerPlayMenu(sf::RenderWindow* window)
     // Initialize Player
     mPlayer = new Player;
 
-    mPlayer->mSprite = *sSpriteManager->GetSprite("test.png");
+    mPlayer->mSprite = sSpriteManager->GetSprite("test.png");
 
 }
 //-----------------------------------------------//
 void Menu::TriggerPlayerMoveDown(sf::RenderWindow* window)
 {
-    mPlayer->PlayerMovement(window, TRIGGER_KEYBOARD_D);
+    mPlayer->PlayerMovement(window, TRIGGER_PLAY_KEYBOARD_D);
 }
 //-----------------------------------------------//
 void Menu::PlayMenu(sf::RenderWindow& window)

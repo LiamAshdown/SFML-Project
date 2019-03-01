@@ -60,7 +60,7 @@ void Animation::AddFrame(const sf::IntRect rect, const uint8 Id)
     mFrames[Id] = animation;
 }
 //-----------------------------------------------//
-void Animation::ExecuteAnimation(const uint8 Id, sf::RenderWindow* window, sf::Sprite& sprite, bool useSprite)
+void Animation::ExecuteAnimation(const uint8 Id, sf::RenderWindow* window, sf::Sprite* sprite, bool useSprite)
 {
     mSprite->setPosition(sf::Vector2f(300, 400));
     AnimationMap::iterator itr = mFrames.find(Id);
@@ -73,8 +73,8 @@ void Animation::ExecuteAnimation(const uint8 Id, sf::RenderWindow* window, sf::S
 
         if (useSprite)
         {
-            sprite.setTextureRect(animation->sIntRect.at(mIncrementCounter));
-            window->draw(sprite);
+            sprite->setTextureRect(animation->sIntRect.at(mIncrementCounter));
+            window->draw(*sprite);
         }
         else
         {
@@ -88,11 +88,6 @@ void Animation::ExecuteAnimation(const uint8 Id, sf::RenderWindow* window, sf::S
 //-----------------------------------------------//
 void Animation::PlayAnimation(const uint8 Id, sf::RenderWindow & window)
 {
-    bool foo = false;
-
-    if (foo == true)
-        ;// Do something
-    else if (foo == false)
-        ;; // Do something
+    ;
 }
 //-----------------------------------------------//

@@ -29,7 +29,7 @@ Player::~Player()
 
 }
 //-----------------------------------------------//
-sf::Sprite Player::GetSprite()
+sf::Sprite* Player::GetSprite()
 {
     return mSprite;
 }
@@ -38,9 +38,9 @@ void Player::PlayerMovement(sf::RenderWindow* window, uint8 triggerID)
 {
     switch (triggerID)
     {
-    case TRIGGER_KEYBOARD_D:
+    case TRIGGER_PLAY_KEYBOARD_D:
     {
-        sSpriteManager->GetSpriteAnimation("test.png")->ExecuteAnimation(MOVEMENT_WALKING_DOWN, window, mSprite, true);
+        sSpriteManager->GetSpriteAnimation("test.png")->ExecuteAnimation(MOVEMENT_WALKING_DOWN, window);
     }
     break;
 
