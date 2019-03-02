@@ -29,8 +29,15 @@
 enum Triggers : uint16
 {
     TRIGGER_NONE                             = 0x00,
+
+    ///< MENU
     TRIGGER_MAIN_MENU_PLAY                   = 0x01,
+
+    ///< PLAYER
     TRIGGER_PLAY_KEYBOARD_D                  = 0x02,
+    TRIGGER_PLAY_KEYBOARD_W                  = 0x03,
+    TRIGGER_PLAY_KEYBOARD_A                  = 0x04,
+    TRIGGER_PLAY_KEYBOARD_S                  = 0x05,
 };
 
 ///< STRUCT

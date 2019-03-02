@@ -43,3 +43,4 @@ typedef std::uint8_t uint8;
 #define CENTRE_BUTTON 5
 #define WIDTH 1200
 #define HEIGHT 800
+#define PLAYER_BASE_SPEED 1

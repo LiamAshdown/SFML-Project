@@ -35,7 +35,14 @@
 class Menu;
 
 ///< TYPEDEF
-typedef std::map<std::string, sf::Sprite*> SpriteMap;
+typedef struct SpriteStruct
+{
+    sf::Sprite* sSprite;
+    sf::Texture* sTexture;
+
+} SpriteData;
+
+typedef std::map<std::string, SpriteData> SpriteMap;
 typedef std::map<std::string, Animation*> SpriteAnimationMap;
 
 class SpriteManager
@@ -47,7 +54,7 @@ public:
     ~SpriteManager();
 
 public:
-    sf::Sprite* GetSprite(std::string name);
+    SpriteData* GetSprite(std::string name);
     void RemoveSprite(std::string name);
 
     Animation* GetSpriteAnimation(std::string name);

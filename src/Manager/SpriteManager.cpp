@@ -31,7 +31,10 @@ SpriteManager::SpriteManager()
 SpriteManager::~SpriteManager()
 {
     for (auto itr : mSprites)
-        delete itr.second;
+    {
+        delete itr.second.sSprite;
+        delete itr.second.sTexture;
+    }
 
     for (auto itr : mAnimationSprites)
         delete itr.second;
@@ -40,11 +43,11 @@ SpriteManager::~SpriteManager()
     mAnimationSprites.clear();
 }
 //-----------------------------------------------//
-sf::Sprite* SpriteManager::GetSprite(std::string name)
+SpriteData* SpriteManager::GetSprite(std::string name)
 {
     SpriteMap::iterator itr = mSprites.find(name);
     if (itr != mSprites.end())
-        return itr->second;
+        return &itr->second;
 
     return nullptr;
 }
@@ -54,7 +57,8 @@ void SpriteManager::RemoveSprite(std::string name)
     SpriteMap::iterator itr = mSprites.find(name);
     if (itr != mSprites.end())
     {
-        delete itr->second;
+        delete itr->second.sSprite;
+        delete itr->second.sTexture;
         mSprites.erase(itr);
     }
 }
@@ -70,14 +74,17 @@ Animation * SpriteManager::GetSpriteAnimation(std::string name)
 //-----------------------------------------------//
 void SpriteManager::AddSprite(std::string fileName)
 {
-    sf::Texture texture;
-
-    if (texture.loadFromFile(fileName))
+    sf::Texture* texture = new sf::Texture;
+    if (texture->loadFromFile(fileName))
     {
         sf::Sprite* sprite = new sf::Sprite;
-        sprite->setTexture(texture);
+        sprite->setTexture(*texture);
 
-        mSprites[fileName] = sprite;
+        SpriteData spriteStruct;
+        spriteStruct.sSprite = sprite;
+        spriteStruct.sTexture = texture;
+       
+        mSprites[fileName] = spriteStruct;
     }
 }
 //-----------------------------------------------//
@@ -92,7 +99,24 @@ void SpriteManager::AddSpriteAnimation(std::string fileName)
         Animation* animation = new Animation(sprite, texture);
 
         animation->AddFrame(sf::IntRect(32, 0, 32, 32), MOVEMENT_WALKING_DOWN);
-        animation->AddFrame(sf::IntRect(32, 96, 32, 32), MOVEMENT_WALKING_DOWN);
+        animation->AddFrame(sf::IntRect(64, 0, 32, 32), MOVEMENT_WALKING_DOWN);
+        animation->AddFrame(sf::IntRect(32, 0, 32, 32), MOVEMENT_WALKING_DOWN);
+        animation->AddFrame(sf::IntRect(0, 0, 32, 32), MOVEMENT_WALKING_DOWN);
+
+        animation->AddFrame(sf::IntRect(32, 96, 32, 32), MOVEMENT_WALKING_UP);
+        animation->AddFrame(sf::IntRect(64, 96, 32, 32), MOVEMENT_WALKING_UP);
+        animation->AddFrame(sf::IntRect(32, 96, 32, 32), MOVEMENT_WALKING_UP);
+        animation->AddFrame(sf::IntRect(0, 96, 32, 32), MOVEMENT_WALKING_UP);
+
+        animation->AddFrame(sf::IntRect(32, 32, 32, 32), MOVEMENT_WALKING_LEFT);
+        animation->AddFrame(sf::IntRect(64, 32, 32, 32), MOVEMENT_WALKING_LEFT);
+        animation->AddFrame(sf::IntRect(32, 32, 32, 32), MOVEMENT_WALKING_LEFT);
+        animation->AddFrame(sf::IntRect(0, 32, 32, 32), MOVEMENT_WALKING_LEFT);
+
+        animation->AddFrame(sf::IntRect(32, 64, 32, 32), MOVEMENT_WALKING_RIGHT);
+        animation->AddFrame(sf::IntRect(64, 64, 32, 32), MOVEMENT_WALKING_RIGHT);
+        animation->AddFrame(sf::IntRect(32, 64, 32, 32), MOVEMENT_WALKING_RIGHT);
+        animation->AddFrame(sf::IntRect(0, 64, 32, 32), MOVEMENT_WALKING_RIGHT);
 
         mAnimationSprites[fileName] = animation;
 

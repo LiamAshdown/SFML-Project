@@ -77,6 +77,9 @@ public:
     void ExecuteTrigger(const TriggerStruct& triggerHandle, sf::RenderWindow* window);
     void TriggerMainMenu(sf::RenderWindow* window);
     void TriggerPlayerMoveDown(sf::RenderWindow* window);
+    void TriggerPlayerMoveUp(sf::RenderWindow* window);
+    void TriggerPlayerMoveLeft(sf::RenderWindow* window);
+    void TriggerPlayerMoveRight(sf::RenderWindow* window);
     void HandleNULL(sf::RenderWindow* window) {}
     ////////////////////////////////////
     //      END OF TRIGGER EVENTS    //
@@ -86,7 +89,7 @@ private:
     ////////////////////////////////////
     //         MENUS                 //
     ////////////////////////////////////
-    void PlayMenu(sf::RenderWindow& window);
+    void PlayMenu(sf::RenderWindow* window);
 
 private:
     uint32 mHeight;

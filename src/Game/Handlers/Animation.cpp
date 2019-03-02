@@ -19,6 +19,8 @@
 #include "Animation.h"
 #include <Windows.h>
 //-----------------------------------------------//
+sf::Clock Animation::mClock;
+//-----------------------------------------------//
 Animation::Animation(sf::Sprite* sprite, sf::Texture* texture)
 {
     mTexture = texture;
@@ -48,6 +50,7 @@ void Animation::AddFrame(const sf::IntRect rect, const uint8 Id)
     if (itr != mFrames.end())
     {
         AnimationData* animation = itr->second;
+        animation->sMaxFrame++;
         animation->sIntRect.push_back(rect);
         return;
     }
@@ -56,38 +59,38 @@ void Animation::AddFrame(const sf::IntRect rect, const uint8 Id)
     AnimationData* animation = new AnimationData;
     animation->sId = Id;
     animation->sIntRect.push_back(rect);
+    animation->sMaxFrame++;
 
     mFrames[Id] = animation;
 }
 //-----------------------------------------------//
 void Animation::ExecuteAnimation(const uint8 Id, sf::RenderWindow* window, sf::Sprite* sprite, bool useSprite)
 {
-    mSprite->setPosition(sf::Vector2f(300, 400));
+    sf::Time time = mClock.getElapsedTime();
+
+    if (time.asSeconds() < 0.2f)
+        return;
+
     AnimationMap::iterator itr = mFrames.find(Id);
     if (itr != mFrames.end())
     {
         AnimationData* animation = itr->second;
 
-        if (mIncrementCounter >= mMaxIncrementCounter)
+        if (mIncrementCounter >= animation->sMaxFrame)
             mIncrementCounter = 0;
 
         if (useSprite)
-        {
             sprite->setTextureRect(animation->sIntRect.at(mIncrementCounter));
-            window->draw(*sprite);
-        }
         else
-        {
             mSprite->setTextureRect(animation->sIntRect.at(mIncrementCounter));
-            window->draw(*mSprite);
-        }
 
         mIncrementCounter++;
+        mClock.restart();
     }
 }
 //-----------------------------------------------//
 void Animation::PlayAnimation(const uint8 Id, sf::RenderWindow & window)
 {
-    ;
+    
 }
 //-----------------------------------------------//

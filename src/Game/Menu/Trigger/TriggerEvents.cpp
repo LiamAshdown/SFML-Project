@@ -31,11 +31,14 @@ TriggerEvents::TriggerEvents()
 TriggerEvents::~TriggerEvents()
 {
 }
-//-----------------------------------------------//
+//-----------------------------------------------//a
 void TriggerEvents::InitializeTriggerEvents()
 {
-    StoreTriggerEvent(Triggers::TRIGGER_MAIN_MENU_PLAY,      "MOUSE_LEFT",     &Menu::TriggerMainMenu           );
-    StoreTriggerEvent(Triggers::TRIGGER_PLAY_KEYBOARD_D,      "KEYBOARD_W",     &Menu::TriggerPlayerMoveDown     );
+    StoreTriggerEvent(Triggers::TRIGGER_MAIN_MENU_PLAY,       "MOUSE_LEFT",     &Menu::TriggerMainMenu            );
+    StoreTriggerEvent(Triggers::TRIGGER_PLAY_KEYBOARD_W,      "KEYBOARD_W",     &Menu::TriggerPlayerMoveUp        );
+    StoreTriggerEvent(Triggers::TRIGGER_PLAY_KEYBOARD_A,      "KEYBOARD_A",     &Menu::TriggerPlayerMoveLeft      );
+    StoreTriggerEvent(Triggers::TRIGGER_PLAY_KEYBOARD_S,      "KEYBOARD_S",     &Menu::TriggerPlayerMoveDown      );
+    StoreTriggerEvent(Triggers::TRIGGER_PLAY_KEYBOARD_D,      "KEYBOARD_D",     &Menu::TriggerPlayerMoveRight     );
 }
 //-----------------------------------------------//
 TriggerStruct TriggerEvents::GetTrigger(uint16 id)

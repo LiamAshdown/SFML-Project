@@ -22,10 +22,12 @@
 GameUI::GameUI(const char* windowTitle) : mWidth(WIDTH), mHeight(HEIGHT)
 {
     mWindow = new sf::RenderWindow(sf::VideoMode(mWidth, mHeight), windowTitle);
+    mWindow->setFramerateLimit(30);
 }
 //-----------------------------------------------//
 GameUI::~GameUI()
 {
+    delete mWindow;
 }
 void GameUI::CreateUI()
 {
@@ -54,11 +56,6 @@ void GameUI::UILoop()
         }
 
         mWindow->clear();
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        {
-            sMenuManager->GetCurrentMenu()->TriggerEvent(mWindow, TRIGGER_PLAY_KEYBOARD_D, "PLAY");
-        }
 
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {

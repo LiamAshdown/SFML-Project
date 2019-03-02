@@ -38,10 +38,11 @@ public:
     ~Player();
 
 public:
-    sf::Sprite* GetSprite();
+    sf::Sprite& GetSprite();
     void PlayerMovement(sf::RenderWindow* window, uint8 triggerID);
 
 private:
-    sf::Sprite* mSprite;
+    sf::Sprite mSprite;
+    sf::Texture mTexture;
 };
 

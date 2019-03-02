@@ -16,20 +16,20 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 //-----------------------------------------------//
-#include "SpriteManager.h"
 #include "TriggerEvents.h"
+#include "SpriteManager.h"
 //-----------------------------------------------//
 Player::Player()
 {
-
+    mTexture = *sSpriteManager->GetSprite("test.png")->sTexture;
+    mSprite.setTexture(mTexture);
 }
 //-----------------------------------------------//
 Player::~Player()
 {
-
 }
 //-----------------------------------------------//
-sf::Sprite* Player::GetSprite()
+sf::Sprite& Player::GetSprite()
 {
     return mSprite;
 }
@@ -38,9 +38,31 @@ void Player::PlayerMovement(sf::RenderWindow* window, uint8 triggerID)
 {
     switch (triggerID)
     {
+    case TRIGGER_PLAY_KEYBOARD_S:
+    {
+        sSpriteManager->GetSpriteAnimation("test.png")->ExecuteAnimation(MOVEMENT_WALKING_DOWN, window, &mSprite, true);
+        mSprite.move(NULL, PLAYER_BASE_SPEED);
+    }
+    break;
+
+    case TRIGGER_PLAY_KEYBOARD_W:
+    {
+        sSpriteManager->GetSpriteAnimation("test.png")->ExecuteAnimation(MOVEMENT_WALKING_UP, window, &mSprite, true);
+        mSprite.move(NULL, -PLAYER_BASE_SPEED);
+    }
+    break;
+
+    case TRIGGER_PLAY_KEYBOARD_A:
+    {
+        sSpriteManager->GetSpriteAnimation("test.png")->ExecuteAnimation(MOVEMENT_WALKING_LEFT, window, &mSprite, true);
+        mSprite.move(-PLAYER_BASE_SPEED, NULL);
+    }
+    break;
+
     case TRIGGER_PLAY_KEYBOARD_D:
     {
-        sSpriteManager->GetSpriteAnimation("test.png")->ExecuteAnimation(MOVEMENT_WALKING_DOWN, window);
+        sSpriteManager->GetSpriteAnimation("test.png")->ExecuteAnimation(MOVEMENT_WALKING_RIGHT, window, &mSprite, true);
+        mSprite.move(PLAYER_BASE_SPEED, NULL);
     }
     break;
 

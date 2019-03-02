@@ -24,19 +24,22 @@ Menu::Menu(const uint32 width, const uint32 height, std::string menu)
 {
     mWidth = width;
     mHeight = height;
-    mFont = new sf::Font;
     mMenuName = menu;
     mLastTriggerId = 0;
+    mFont = new sf::Font;
+    mPlayer = nullptr;
     InitializeFont();
 }
 //-----------------------------------------------//
 Menu::~Menu()
 {
-    delete mPlayer;
-
     for (auto itr : mSlot)
         delete itr.second;
 
+    if (mPlayer)
+        delete mPlayer;
+
+    delete mFont;
     mSlot.clear();
 }
 //-----------------------------------------------//
@@ -59,6 +62,9 @@ void Menu::DrawMenu(sf::RenderWindow* window)
 
         window->draw(menu->sText);
     }
+
+    if (mMenuName == "PLAY")
+        PlayMenu(window);
 }
 //-----------------------------------------------//
 bool Menu::CheckIntersect(sf::RenderWindow * window, MenuData* menu)
@@ -152,25 +158,56 @@ void Menu::TriggerMainMenu(sf::RenderWindow* window)
             {
                 // Change to our play menu
                 sMenuManager->SetCurrentMenu(sMenuManager->GetMenuByName("PLAY"));
+                sMenuManager->GetCurrentMenu()->mPlayer = new Player;
                 break;
             }
         }
     }
-
-    // Initialize Player
-    mPlayer = new Player;
-
-    mPlayer->mSprite = sSpriteManager->GetSprite("test.png");
-
 }
 //-----------------------------------------------//
 void Menu::TriggerPlayerMoveDown(sf::RenderWindow* window)
 {
+    mPlayer->PlayerMovement(window, TRIGGER_PLAY_KEYBOARD_S);
+}
+//-----------------------------------------------//
+void Menu::TriggerPlayerMoveUp(sf::RenderWindow* window)
+{
+    mPlayer->PlayerMovement(window, TRIGGER_PLAY_KEYBOARD_W);
+}
+//-----------------------------------------------//
+void Menu::TriggerPlayerMoveLeft(sf::RenderWindow* window)
+{
+    mPlayer->PlayerMovement(window, TRIGGER_PLAY_KEYBOARD_A);
+}
+//-----------------------------------------------//
+void Menu::TriggerPlayerMoveRight(sf::RenderWindow* window)
+{
     mPlayer->PlayerMovement(window, TRIGGER_PLAY_KEYBOARD_D);
 }
 //-----------------------------------------------//
-void Menu::PlayMenu(sf::RenderWindow& window)
+void Menu::PlayMenu(sf::RenderWindow* window)
 {
-    ;
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    {
+        sMenuManager->GetCurrentMenu()->TriggerEvent(window, TRIGGER_PLAY_KEYBOARD_D, "PLAY");
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    {
+        sMenuManager->GetCurrentMenu()->TriggerEvent(window, TRIGGER_PLAY_KEYBOARD_W, "PLAY");
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    {
+        sMenuManager->GetCurrentMenu()->TriggerEvent(window, TRIGGER_PLAY_KEYBOARD_A, "PLAY");
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    {
+        sMenuManager->GetCurrentMenu()->TriggerEvent(window, TRIGGER_PLAY_KEYBOARD_S, "PLAY");
+    }
+
+    window->draw(mPlayer->mSprite);
 }
 //-----------------------------------------------//

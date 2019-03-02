@@ -43,7 +43,9 @@ enum MovementType
 ///< TYPEDEF
 typedef struct AnimationStruct
 {
+    AnimationStruct() : sId(0), sMaxFrame(0) {}
     uint8 sId;
+    uint8 sMaxFrame;
     std::vector<sf::IntRect> sIntRect;
 
 }AnimationData;
@@ -69,5 +71,7 @@ private:
     AnimationMap mFrames;
     uint8 mIncrementCounter;
     uint8 mMaxIncrementCounter;
+
+    static sf::Clock mClock;
 };
 
