@@ -32,12 +32,16 @@ enum Triggers : uint16
 
     ///< MENU
     TRIGGER_MAIN_MENU_PLAY                   = 0x01,
+    TRIGGER_MAIN_MENU_HELP                   = 0x02,
+    TRIGGER_HELP_MENU_BACK                   = 0x03,
 
     ///< PLAYER
-    TRIGGER_PLAY_KEYBOARD_D                  = 0x02,
-    TRIGGER_PLAY_KEYBOARD_W                  = 0x03,
-    TRIGGER_PLAY_KEYBOARD_A                  = 0x04,
-    TRIGGER_PLAY_KEYBOARD_S                  = 0x05,
+    TRIGGER_PLAY_KEYBOARD_D                  = 0x30,
+    TRIGGER_PLAY_KEYBOARD_W                  = 0x32,
+    TRIGGER_PLAY_KEYBOARD_A                  = 0x33,
+    TRIGGER_PLAY_KEYBOARD_S                  = 0x34,
+
+    TRIGGER_CURRENT_MENU_BUTTONS             = 0x99
 };
 
 ///< STRUCT

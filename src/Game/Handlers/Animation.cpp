@@ -58,8 +58,8 @@ void Animation::AddFrame(const sf::IntRect rect, const uint8 Id)
     // Else we add the new frame
     AnimationData* animation = new AnimationData;
     animation->sId = Id;
-    animation->sIntRect.push_back(rect);
     animation->sMaxFrame++;
+    animation->sIntRect.push_back(rect);
 
     mFrames[Id] = animation;
 }

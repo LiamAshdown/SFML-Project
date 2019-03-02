@@ -50,17 +50,22 @@ void GameUI::UILoop()
             }
             break;
 
+            // mouse button released
+            case sf::Event::MouseButtonReleased:
+            {
+                if (event.mouseButton.button == sf::Mouse::Left)
+                {
+                    sMenuManager->GetCurrentMenu()->TriggerEvent(mWindow, TRIGGER_CURRENT_MENU_BUTTONS, sMenuManager->GetCurrentMenu()->mMenuName);
+                }
+            } 
+            break;
+
             default:
                 break;
             }
         }
 
         mWindow->clear();
-
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-        {
-            sMenuManager->GetCurrentMenu()->TriggerEvent(mWindow, TRIGGER_MAIN_MENU_PLAY, "MAIN");
-        }
 
         // Draw our current menu
         sMenuManager->GetCurrentMenu()->DrawMenu(mWindow);

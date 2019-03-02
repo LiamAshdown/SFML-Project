@@ -75,11 +75,19 @@ public:
     ////////////////////////////////////
     void TriggerEvent(sf::RenderWindow* window, uint8 triggerID, std::string menuName);
     void ExecuteTrigger(const TriggerStruct& triggerHandle, sf::RenderWindow* window);
+
+    ///< MENU
     void TriggerMainMenu(sf::RenderWindow* window);
+    void TriggerMainHelp(sf::RenderWindow* window);
+    void TriggerHelpBack(sf::RenderWindow* window);
+    void TriggerAllCurrentButtons(sf::RenderWindow* window);
+
+    ///< PLAYER
     void TriggerPlayerMoveDown(sf::RenderWindow* window);
     void TriggerPlayerMoveUp(sf::RenderWindow* window);
     void TriggerPlayerMoveLeft(sf::RenderWindow* window);
     void TriggerPlayerMoveRight(sf::RenderWindow* window);
+
     void HandleNULL(sf::RenderWindow* window) {}
     ////////////////////////////////////
     //      END OF TRIGGER EVENTS    //

@@ -43,13 +43,18 @@ void GameManager::LoadEngineData()
     ///< This is where you load your menu(s)
     Menu* mainMenu = new Menu(WIDTH, HEIGHT, "MAIN");
     mainMenu->CreateButton("Play", sf::Color::White, 24, sf::Vector2f(WIDTH / 2, 300), TRIGGER_MAIN_MENU_PLAY, true);
-    //mainMenu->CreateButton("Help", sf::Color::White, 24, sf::Vector2f(WIDTH / 2, HEIGHT / 2), TRIGGER_MAIN_MENU_PLAY, true);
+    mainMenu->CreateButton("Help", sf::Color::White, 24, sf::Vector2f(WIDTH / 2, HEIGHT / 2), TRIGGER_MAIN_MENU_HELP, true);
 
     sMenuManager->AddMenu("MAIN", mainMenu);
     sMenuManager->SetCurrentMenu(sMenuManager->GetMenuByName("MAIN"));
 
     Menu* playMenu = new Menu(WIDTH, HEIGHT, "PLAY");
     sMenuManager->AddMenu("PLAY", playMenu);
+    
+    Menu* helpMenu = new Menu(WIDTH, HEIGHT, "HELP");
+    helpMenu->CreateText("This is the help section", sf::Color::White, 24, sf::Vector2f(WIDTH / 2, 300));
+    helpMenu->CreateButton("Back", sf::Color::White, 24, sf::Vector2f(WIDTH / 2, HEIGHT / 2), TRIGGER_HELP_MENU_BACK, true);
+    sMenuManager->AddMenu("HELP", helpMenu);
 
     ///< Loading trigger events
     sTriggerEvent->InitializeTriggerEvents();

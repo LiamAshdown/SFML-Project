@@ -83,7 +83,7 @@ void Menu::InitializeFont()
     }
 }
 //-----------------------------------------------//
-void Menu::CreateText(std::string name, sf::Color colour, uint32 size, sf::Vector2f windowSize)
+void Menu::CreateText(std::string name, sf::Color colour, uint32 size, sf::Vector2f position)
 {
     MenuData* menu = new MenuData(false);
 
@@ -91,7 +91,7 @@ void Menu::CreateText(std::string name, sf::Color colour, uint32 size, sf::Vecto
     menu->sText.setString(name);
     menu->sText.setFillColor(colour);
     menu->sText.setCharacterSize(size);
-    menu->sText.setPosition(windowSize);
+    menu->sText.setPosition(position);
 
     mSlot[TRIGGER_NONE] = menu;
 }
@@ -165,6 +165,36 @@ void Menu::TriggerMainMenu(sf::RenderWindow* window)
     }
 }
 //-----------------------------------------------//
+void Menu::TriggerMainHelp(sf::RenderWindow * window)
+{
+    sMenuManager->SetCurrentMenu(sMenuManager->GetMenuByName("HELP"));
+}
+//-----------------------------------------------//
+void Menu::TriggerHelpBack(sf::RenderWindow * window)
+{
+    sMenuManager->SetCurrentMenu(sMenuManager->GetMenuByName("MAIN"));
+}
+//-----------------------------------------------//
+void Menu::TriggerAllCurrentButtons(sf::RenderWindow * window)
+{
+    SlotMap::iterator itr;
+    for (itr = mSlot.begin(); itr != mSlot.end(); itr++)
+    {
+        MenuData* menu = itr->second;
+
+        if (menu->sIsButton)
+        {
+            if (CheckIntersect(window, menu))
+            {
+                mLastTriggerId = menu->sTriggerID;
+                const TriggerStruct& triggerHandle = sTriggerEvent->GetTrigger(menu->sTriggerID);
+                ExecuteTrigger(triggerHandle, window);
+                break;
+            }
+        }
+    }
+}
+//-----------------------------------------------//
 void Menu::TriggerPlayerMoveDown(sf::RenderWindow* window)
 {
     mPlayer->PlayerMovement(window, TRIGGER_PLAY_KEYBOARD_S);
@@ -187,7 +217,6 @@ void Menu::TriggerPlayerMoveRight(sf::RenderWindow* window)
 //-----------------------------------------------//
 void Menu::PlayMenu(sf::RenderWindow* window)
 {
-
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         sMenuManager->GetCurrentMenu()->TriggerEvent(window, TRIGGER_PLAY_KEYBOARD_D, "PLAY");
